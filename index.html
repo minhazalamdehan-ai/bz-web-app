@@ -3,319 +3,298 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BZ Bal Store Management</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <title>Zaman Agro Fisheries Ltd. - Sales Management</title>
     <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f0f4f8; margin: 0; padding: 15px; color: #333; }
-        .container { max-width: 500px; margin: auto; background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        h2 { text-align: center; color: #2c3e50; margin-bottom: 25px; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
-        
-        .input-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 8px; font-weight: bold; color: #555; }
-        input { width: 100%; padding: 12px; border: 1px solid #ccd6dd; border-radius: 10px; box-sizing: border-box; font-size: 16px; transition: 0.3s; }
-        input:focus { border-color: #3498db; outline: none; box-shadow: 0 0 5px rgba(52,152,219,0.3); }
-        
-        .button-stack { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
-        button { width: 100%; padding: 14px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 16px; transition: 0.2s; }
-        .btn-add { background-color: #2ecc71; color: white; }
-        .btn-add:active { background-color: #27ae60; transform: scale(0.98); }
-        .btn-report { background-color: #3498db; color: white; }
-        .btn-report:active { background-color: #2980b9; transform: scale(0.98); }
-        
-        #stock-list { margin-top: 30px; background: #f9f9f9; padding: 15px; border-radius: 12px; }
-        .item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; font-size: 15px; }
-        .item:last-child { border-bottom: none; }
+        /* সিএসএস ডিজাইন */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+        header {
+            background-color: #70c1cf;
+            padding: 20px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            color: #000;
+        }
+        .top-section {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .input-form {
+            flex: 1.5;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fafafa;
+        }
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            font-weight: bold;
+            font-size: 13px;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        input, select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            outline: none;
+        }
+        input:focus { border-color: #70c1cf; }
+        .btn-container {
+            grid-column: span 2;
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            background-color: #e0e0e0;
+            transition: 0.3s;
+        }
+        button:hover { background-color: #d0d0d0; }
+        .update-btn { background-color: #70c1cf; color: white; }
+        .update-btn:hover { background-color: #5bb0bd; }
 
-        /* রিপোর্ট পেজ স্টাইল */
-        #report-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 1000; padding: 20px; box-sizing: border-box; overflow-y: auto; }
-        .report-paper { border: 2px solid #333; padding: 20px; min-height: 80%; position: relative; background: #fff; }
-        .report-header { text-align: center; border-bottom: 2px double #333; margin-bottom: 20px; padding-bottom: 10px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        th, td { border: 1px solid #333; padding: 10px; text-align: left; }
-        th { background: #f2f2f2; }
-        .close-report { background: #e74c3c; color: white; padding: 15px; text-align: center; border-radius: 10px; margin-top: 20px; font-weight: bold; }
+        /* ডান পাশের টোটাল সেল বক্স */
+        .summary-panel {
+            flex: 0.8;
+            background-color: #f9e1a1;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #d4af37;
+            text-align: center;
+        }
+        .summary-header {
+            font-weight: bold;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+        .search-box {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #999;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        .summary-result {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: rgba(255,255,255,0.5);
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* টেবিল ডিজাইন */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th {
+            background-color: #d1ecf1;
+            border: 1px solid #aaa;
+            padding: 12px;
+            text-align: left;
+        }
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+        tr:nth-child(even) { background-color: #f9f9f9; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>BZ Bal ইনভেন্টরি</h2>
-    
-    <div class="input-group">
-        <label>মালের নাম</label>
-        <input type="text" id="itemName" placeholder="উদা: ডাল, তেল বা সিমেন্ট">
-    </div>
-    
-    <div class="input-group">
-        <label>পরিমাণ (কেজি/বক্স)</label>
-        <input type="number" id="itemQty" placeholder="কতটুকু স্টকে যুক্ত হবে?">
-    </div>
+    <header>Zaman Agro Fisheries Ltd.</header>
 
-    <div class="button-stack">
-        <button class="btn-add" onclick="addItem()">✅ স্টকে যোগ করুন</button>
-        <button class="btn-report" onclick="showReport()">📄 হিসাবের রিপোর্ট দেখুন</button>
-    </div>
-
-    <div id="stock-list">
-        <strong>📦 আজকের মজুদ তালিকা:</strong>
-        <div id="items"></div>
-    </div>
-    
-    <p style="text-align: center; font-size: 12px; color: #999; margin-top: 20px;" onclick="clearData()">সব হিসাব মুছতে এখানে ক্লিক করুন</p>
-</div>
-
-<div id="report-overlay">
-    <div class="report-paper">
-        <div class="report-header">
-            <h3>দৈনিক মালামাল রিপোর্ট</h3>
-            <p id="report-date"></p>
+    <div class="top-section">
+        <div class="input-form">
+            <div class="input-group">
+                <label>DATE</label>
+                <input type="date" id="date">
+            </div>
+            <div class="input-group">
+                <label>ITEM</label>
+                <input type="text" id="item" placeholder="যেমন: Spinach">
+            </div>
+            <div class="input-group">
+                <label>QUANTITY</label>
+                <input type="number" id="quantity" step="0.01">
+            </div>
+            <div class="input-group">
+                <label>UNIT</label>
+                <select id="unit">
+                    <option value="Bunches">Bunches</option>
+                    <option value="Kg">Kg</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>UNIT PRICE (BDT)</label>
+                <input type="number" id="price">
+            </div>
+            <div class="input-group">
+                <label>LOCATION</label>
+                <input type="text" id="location" placeholder="যেমন: 9th Floor Dining">
+            </div>
+            <div class="btn-container">
+                <button class="update-btn" onclick="addEntry()">UPDATE LIST</button>
+                <button onclick="clearInputs()">CLEAR</button>
+            </div>
         </div>
-        <div id="report-content"></div>
-        <br><br>
-        <p style="text-align: right;">পরিচালক স্বাক্ষর: <br><br><strong>BZ Bal</strong></p>
+
+        <div class="summary-panel">
+            <div class="summary-header">Total Sell</div>
+            <label style="display:block; margin-bottom:10px;">আইটেম এর নাম লিখে সার্চ দিন</label>
+            <input type="text" id="summarySearch" class="search-box" placeholder="Item Name..." oninput="updateSummary()">
+            <div class="summary-result" id="resultBox">
+                <span id="sumItemName" style="color:#d32f2f;">ITEM</span>
+                <span id="sumTotalValue" style="color:#2e7d32;">0 BDT</span>
+                <span id="sumTotalQty" style="color:#1976d2;">0</span>
+            </div>
+        </div>
     </div>
-    <div class="close-report" onclick="closeReport()">রিপোর্ট বন্ধ করুন</div>
+
+    <table id="recordsTable">
+        <thead>
+            <tr>
+                <th>DATE</th>
+                <th>ITEM</th>
+                <th>QUANTITY</th>
+                <th>UNIT</th>
+                <th>UNIT PRICE</th>
+                <th>LOCATION</th>
+                <th>TOTAL</th>
+            </tr>
+        </thead>
+        <tbody>
+            </tbody>
+    </table>
 </div>
 
 <script>
-    const tg = window.Telegram.WebApp;
-    tg.expand(); // পুরো স্ক্রিন জুড়ে অ্যাপ দেখাবে
+    // ডেটা স্টোর করার জন্য অ্যারে
+    let entries = [];
 
-    let stockData = JSON.parse(localStorage.getItem('bz_store_data')) || [];
+    // নতুন ডেটা যোগ করার ফাংশন
+    function addEntry() {
+        const date = document.getElementById('date').value;
+        const item = document.getElementById('item').value;
+        const quantity = parseFloat(document.getElementById('quantity').value) || 0;
+        const unit = document.getElementById('unit').value;
+        const price = parseFloat(document.getElementById('price').value) || 0;
+        const location = document.getElementById('location').value;
+        const total = quantity * price;
 
-    function addItem() {
-        const name = document.getElementById('itemName').value;
-        const qty = document.getElementById('itemQty').value;
-
-        if(name && qty) {
-            const entry = { 
-                name: name, 
-                qty: qty, 
-                time: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) 
-            };
-            stockData.push(entry);
-            localStorage.setItem('bz_store_data', JSON.stringify(stockData));
-            renderItems();
-            
-            // ইনপুট খালি করা
-            document.getElementById('itemName').value = '';
-            document.getElementById('itemQty').value = '';
-            
-            // হ্যাপটিক ফিডব্যাক (ভাইব্রেশন)
-            tg.HapticFeedback.notificationOccurred('success');
-        } else {
-            tg.showAlert("দয়া করে নাম এবং পরিমাণ সঠিকভাবে লিখুন।");
-        }
-    }
-
-    function renderItems() {
-        const div = document.getElementById('items');
-        div.innerHTML = '';
-        if(stockData.length === 0) {
-            div.innerHTML = '<p style="color:#aaa; font-size:13px;">কোনো ডাটা নেই</p>';
+        if(!date || !item) {
+            alert("দয়া করে তারিখ এবং আইটেম এর নাম দিন।");
             return;
         }
-        stockData.forEach(item => {
-            div.innerHTML += `<div class="item"><span>🔹 ${item.name}</span> <b>${item.qty}</b></div>`;
+
+        const newEntry = { date, item, quantity, unit, price, location, total };
+        entries.push(newEntry);
+        
+        renderTable();
+        updateSummary(); // লিস্ট আপডেট হলে সামারিও চেক করবে
+        clearInputs();
+    }
+
+    // টেবিল দেখানোর ফাংশন
+    function renderTable() {
+        const tbody = document.querySelector("#recordsTable tbody");
+        tbody.innerHTML = "";
+        entries.forEach(entry => {
+            const row = `<tr>
+                <td>${entry.date}</td>
+                <td>${entry.item}</td>
+                <td>${entry.quantity}</td>
+                <td>${entry.unit}</td>
+                <td>${entry.price} BDT</td>
+                <td>${entry.location}</td>
+                <td>${entry.total} BDT</td>
+            </tr>`;
+            tbody.innerHTML += row;
         });
     }
 
-    function showReport() {
-        if(stockData.length === 0) {
-            tg.showAlert("হিসাব করার জন্য কোনো ডাটা নেই!");
+    // ডান পাশের টোটাল সেল ক্যালকুলেশন ফাংশন
+    function updateSummary() {
+        const searchText = document.getElementById('summarySearch').value.toLowerCase();
+        const sumItemName = document.getElementById('sumItemName');
+        const sumTotalValue = document.getElementById('sumTotalValue');
+        const sumTotalQty = document.getElementById('sumTotalQty');
+
+        if(!searchText) {
+            sumItemName.innerText = "ITEM";
+            sumTotalValue.innerText = "0 BDT";
+            sumTotalQty.innerText = "0";
             return;
         }
-        const overlay = document.getElementById('report-overlay');
-        const content = document.getElementById('report-content');
-        document.getElementById('report-date').innerText = "তারিখ: " + new Date().toLocaleDateString();
-        
-        let html = "<table><tr><th>নাম</th><th>পরিমাণ</th><th>সময়</th></tr>";
-        stockData.forEach(item => {
-            html += `<tr><td>${item.name}</td><td>${item.qty}</td><td>${item.time}</td></tr>`;
-        });
-        html += "</table>";
-        
-        content.innerHTML = html;
-        overlay.style.display = 'block';
-    }
 
-    function closeReport() {
-        document.getElementById('report-overlay').style.display = 'none';
-    }
+        let filteredTotal = 0;
+        let filteredQty = 0;
+        let found = false;
 
-    function clearData() {
-        tg.showConfirm("আপনি কি নিশ্চিত যে সব হিসাব মুছে ফেলতে চান?", (ok) => {
-            if(ok) {
-                stockData = [];
-                localStorage.removeItem('bz_store_data');
-                renderItems();
+        entries.forEach(entry => {
+            if(entry.item.toLowerCase().includes(searchText)) {
+                filteredTotal += entry.total;
+                filteredQty += entry.quantity;
+                found = true;
             }
         });
-    }
 
-    // শুরুতে ডাটা লোড করা
-    renderItems();
-</script>
-
-</body>
-    </html>
-    <!DOCTYPE html>
-<html lang="bn">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BZ Bal Store Management</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f0f4f8; margin: 0; padding: 15px; color: #333; }
-        .container { max-width: 500px; margin: auto; background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        h2 { text-align: center; color: #2c3e50; margin-bottom: 25px; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
-        
-        .input-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 8px; font-weight: bold; color: #555; }
-        input { width: 100%; padding: 12px; border: 1px solid #ccd6dd; border-radius: 10px; box-sizing: border-box; font-size: 16px; transition: 0.3s; }
-        input:focus { border-color: #3498db; outline: none; box-shadow: 0 0 5px rgba(52,152,219,0.3); }
-        
-        .button-stack { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
-        button { width: 100%; padding: 14px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 16px; transition: 0.2s; }
-        .btn-add { background-color: #2ecc71; color: white; }
-        .btn-add:active { background-color: #27ae60; transform: scale(0.98); }
-        .btn-report { background-color: #3498db; color: white; }
-        .btn-report:active { background-color: #2980b9; transform: scale(0.98); }
-        
-        #stock-list { margin-top: 30px; background: #f9f9f9; padding: 15px; border-radius: 12px; }
-        .item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; font-size: 15px; }
-        .item:last-child { border-bottom: none; }
-
-        /* রিপোর্ট পেজ স্টাইল */
-        #report-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 1000; padding: 20px; box-sizing: border-box; overflow-y: auto; }
-        .report-paper { border: 2px solid #333; padding: 20px; min-height: 80%; position: relative; background: #fff; }
-        .report-header { text-align: center; border-bottom: 2px double #333; margin-bottom: 20px; padding-bottom: 10px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        th, td { border: 1px solid #333; padding: 10px; text-align: left; }
-        th { background: #f2f2f2; }
-        .close-report { background: #e74c3c; color: white; padding: 15px; text-align: center; border-radius: 10px; margin-top: 20px; font-weight: bold; }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <h2>BZ Bal ইনভেন্টরি</h2>
-    
-    <div class="input-group">
-        <label>মালের নাম</label>
-        <input type="text" id="itemName" placeholder="উদা: ডাল, তেল বা সিমেন্ট">
-    </div>
-    
-    <div class="input-group">
-        <label>পরিমাণ (কেজি/বক্স)</label>
-        <input type="number" id="itemQty" placeholder="কতটুকু স্টকে যুক্ত হবে?">
-    </div>
-
-    <div class="button-stack">
-        <button class="btn-add" onclick="addItem()">✅ স্টকে যোগ করুন</button>
-        <button class="btn-report" onclick="showReport()">📄 হিসাবের রিপোর্ট দেখুন</button>
-    </div>
-
-    <div id="stock-list">
-        <strong>📦 আজকের মজুদ তালিকা:</strong>
-        <div id="items"></div>
-    </div>
-    
-    <p style="text-align: center; font-size: 12px; color: #999; margin-top: 20px;" onclick="clearData()">সব হিসাব মুছতে এখানে ক্লিক করুন</p>
-</div>
-
-<div id="report-overlay">
-    <div class="report-paper">
-        <div class="report-header">
-            <h3>দৈনিক মালামাল রিপোর্ট</h3>
-            <p id="report-date"></p>
-        </div>
-        <div id="report-content"></div>
-        <br><br>
-        <p style="text-align: right;">পরিচালক স্বাক্ষর: <br><br><strong>BZ Bal</strong></p>
-    </div>
-    <div class="close-report" onclick="closeReport()">রিপোর্ট বন্ধ করুন</div>
-</div>
-
-<script>
-    const tg = window.Telegram.WebApp;
-    tg.expand(); // পুরো স্ক্রিন জুড়ে অ্যাপ দেখাবে
-
-    let stockData = JSON.parse(localStorage.getItem('bz_store_data')) || [];
-
-    function addItem() {
-        const name = document.getElementById('itemName').value;
-        const qty = document.getElementById('itemQty').value;
-
-        if(name && qty) {
-            const entry = { 
-                name: name, 
-                qty: qty, 
-                time: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) 
-            };
-            stockData.push(entry);
-            localStorage.setItem('bz_store_data', JSON.stringify(stockData));
-            renderItems();
-            
-            // ইনপুট খালি করা
-            document.getElementById('itemName').value = '';
-            document.getElementById('itemQty').value = '';
-            
-            // হ্যাপটিক ফিডব্যাক (ভাইব্রেশন)
-            tg.HapticFeedback.notificationOccurred('success');
+        if(found) {
+            sumItemName.innerText = searchText.toUpperCase();
+            sumTotalValue.innerText = filteredTotal + " BDT";
+            sumTotalQty.innerText = filteredQty;
         } else {
-            tg.showAlert("দয়া করে নাম এবং পরিমাণ সঠিকভাবে লিখুন।");
+            sumItemName.innerText = "NOT FOUND";
+            sumTotalValue.innerText = "0 BDT";
+            sumTotalQty.innerText = "0";
         }
     }
 
-    function renderItems() {
-        const div = document.getElementById('items');
-        div.innerHTML = '';
-        if(stockData.length === 0) {
-            div.innerHTML = '<p style="color:#aaa; font-size:13px;">কোনো ডাটা নেই</p>';
-            return;
-        }
-        stockData.forEach(item => {
-            div.innerHTML += `<div class="item"><span>🔹 ${item.name}</span> <b>${item.qty}</b></div>`;
-        });
+    // ইনপুট বক্স খালি করার ফাংশন
+    function clearInputs() {
+        document.getElementById('item').value = '';
+        document.getElementById('quantity').value = '';
+        document.getElementById('price').value = '';
+        document.getElementById('location').value = '';
     }
-
-    function showReport() {
-        if(stockData.length === 0) {
-            tg.showAlert("হিসাব করার জন্য কোনো ডাটা নেই!");
-            return;
-        }
-        const overlay = document.getElementById('report-overlay');
-        const content = document.getElementById('report-content');
-        document.getElementById('report-date').innerText = "তারিখ: " + new Date().toLocaleDateString();
-        
-        let html = "<table><tr><th>নাম</th><th>পরিমাণ</th><th>সময়</th></tr>";
-        stockData.forEach(item => {
-            html += `<tr><td>${item.name}</td><td>${item.qty}</td><td>${item.time}</td></tr>`;
-        });
-        html += "</table>";
-        
-        content.innerHTML = html;
-        overlay.style.display = 'block';
-    }
-
-    function closeReport() {
-        document.getElementById('report-overlay').style.display = 'none';
-    }
-
-    function clearData() {
-        tg.showConfirm("আপনি কি নিশ্চিত যে সব হিসাব মুছে ফেলতে চান?", (ok) => {
-            if(ok) {
-                stockData = [];
-                localStorage.removeItem('bz_store_data');
-                renderItems();
-            }
-        });
-    }
-
-    // শুরুতে ডাটা লোড করা
-    renderItems();
 </script>
 
 </body>

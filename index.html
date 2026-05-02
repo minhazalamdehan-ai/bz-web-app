@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BZ Bal Web App</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e3effd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #0088cc;
+            font-size: 50px;
+            margin: 0;
+        }
+        p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <p>টেলিগ্রাম ওয়েব অ্যাপে আপনাকে স্বাগতম</p>
+        <h1>BZ Bal</h1>
+    </div>
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.expand(); 
+    </script>
+</body>
+      </html>
+      

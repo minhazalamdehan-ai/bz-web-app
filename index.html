@@ -3,299 +3,578 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zaman Agro Fisheries Ltd. - Sales Management</title>
+    <title>Zaman Agro Fisheries Ltd. - Professional Sales Management System</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* সিএসএস ডিজাইন */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f2f5;
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --success-color: #059669;
+            --danger-color: #dc2626;
+            --warning-color: #d97706;
+            --info-color: #0ea5e9;
+            --dark-color: #1f2937;
+            --light-color: #f8fafc;
+            --border-color: #e2e8f0;
+            --text-primary: #111827;
+            --text-secondary: #6b7280;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --radius: 12px;
+        }
+
+        * {
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            box-sizing: border-box;
         }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
         .container {
-            max-width: 1100px;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
         }
-        header {
-            background-color: #70c1cf;
-            padding: 20px;
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            padding: 2rem;
             text-align: center;
-            font-size: 28px;
-            font-weight: bold;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            color: #000;
+            position: relative;
+            overflow: hidden;
         }
-        .top-section {
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-            margin-bottom: 30px;
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
         }
-        .input-form {
-            flex: 1.5;
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 2.5rem;
+        }
+
+        .grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background-color: #fafafa;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
         }
-        .input-group {
+
+        /* Form Card */
+        .card {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem;
+        }
+
+        .form-group {
             display: flex;
             flex-direction: column;
+            gap: 0.5rem;
         }
-        label {
-            font-weight: bold;
-            font-size: 13px;
-            margin-bottom: 5px;
-            color: #555;
-        }
-        input, select {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            outline: none;
-        }
-        input:focus { border-color: #70c1cf; }
-        .btn-container {
-            grid-column: span 2;
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        button {
-            padding: 12px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-            background-color: #e0e0e0;
-            transition: 0.3s;
-        }
-        button:hover { background-color: #d0d0d0; }
-        .update-btn { background-color: #70c1cf; color: white; }
-        .update-btn:hover { background-color: #5bb0bd; }
 
-        /* ডান পাশের টোটাল সেল বক্স */
-        .summary-panel {
-            flex: 0.8;
-            background-color: #f9e1a1;
-            padding: 25px;
+        .form-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-input, .form-select {
+            padding: 0.875rem 1rem;
+            border: 2px solid var(--border-color);
             border-radius: 8px;
-            border: 1px solid #d4af37;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            background: white;
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            grid-column: 1 / -1;
+            margin-top: 1rem;
+        }
+
+        .btn {
+            padding: 0.875rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex: 1;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-secondary {
+            background: #f1f5f9;
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+        }
+
+        /* Summary Card */
+        .summary-card {
+            height: fit-content;
+        }
+
+        .summary-search {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            background: white;
+        }
+
+        .summary-search:focus {
+            outline: none;
+            border-color: var(--info-color);
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+        }
+
+        .summary-stats {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(202, 138, 4, 0.2);
+        }
+
+        .summary-item {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--warning-color);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .stat-item {
             text-align: center;
         }
-        .summary-header {
-            font-weight: bold;
-            border-bottom: 2px solid #333;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            font-size: 22px;
-        }
-        .search-box {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            border: 1px solid #999;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 16px;
-        }
-        .summary-result {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            background: rgba(255,255,255,0.5);
-            padding: 15px;
-            border-radius: 5px;
-            font-size: 18px;
-            font-weight: bold;
+
+        .stat-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
         }
 
-        /* টেবিল ডিজাইন */
+        .stat-total { color: var(--success-color); }
+        .stat-quantity { color: var(--info-color); }
+
+        /* Table */
+        .table-container {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
         }
+
         th {
-            background-color: #d1ecf1;
-            border: 1px solid #aaa;
-            padding: 12px;
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            padding: 1.25rem 1rem;
             text-align: left;
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 2px solid var(--border-color);
         }
+
         td {
-            border: 1px solid #ddd;
-            padding: 10px;
+            padding: 1.25rem 1rem;
+            border-bottom: 1px solid var(--border-color);
         }
-        tr:nth-child(even) { background-color: #f9f9f9; }
+
+        tr:hover {
+            background: #f8fafc;
+        }
+
+        .total-cell {
+            font-weight: 600;
+            color: var(--success-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .main-content {
+                padding: 1.5rem;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Auto-suggest Dropdown */
+        .autocomplete {
+            position: relative;
+        }
+
+        .autocomplete-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            box-shadow: var(--shadow-lg);
+            display: none;
+        }
+
+        .autocomplete-item {
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.2s ease;
+        }
+
+        .autocomplete-item:hover,
+        .autocomplete-item.selected {
+            background: #f8fafc;
+        }
+
+        .autocomplete-item:last-child {
+            border-bottom: none;
+        }
     </style>
 </head>
 <body>
-
-<div class="container">
-    <header>Zaman Agro Fisheries Ltd.</header>
-
-    <div class="top-section">
-        <div class="input-form">
-            <div class="input-group">
-                <label>DATE</label>
-                <input type="date" id="date">
-            </div>
-            <div class="input-group">
-                <label>ITEM</label>
-                <input type="text" id="item" placeholder="যেমন: Spinach">
-            </div>
-            <div class="input-group">
-                <label>QUANTITY</label>
-                <input type="number" id="quantity" step="0.01">
-            </div>
-            <div class="input-group">
-                <label>UNIT</label>
-                <select id="unit">
-                    <option value="Bunches">Bunches</option>
-                    <option value="Kg">Kg</option>
-                </select>
-            </div>
-            <div class="input-group">
-                <label>UNIT PRICE (BDT)</label>
-                <input type="number" id="price">
-            </div>
-            <div class="input-group">
-                <label>LOCATION</label>
-                <input type="text" id="location" placeholder="যেমন: 9th Floor Dining">
-            </div>
-            <div class="btn-container">
-                <button class="update-btn" onclick="addEntry()">UPDATE LIST</button>
-                <button onclick="clearInputs()">CLEAR</button>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-fish"></i> Zaman Agro Fisheries Ltd.</h1>
+                <p>Professional Sales Management System</p>
             </div>
         </div>
 
-        <div class="summary-panel">
-            <div class="summary-header">Total Sell</div>
-            <label style="display:block; margin-bottom:10px;">আইটেম এর নাম লিখে সার্চ দিন</label>
-            <input type="text" id="summarySearch" class="search-box" placeholder="Item Name..." oninput="updateSummary()">
-            <div class="summary-result" id="resultBox">
-                <span id="sumItemName" style="color:#d32f2f;">ITEM</span>
-                <span id="sumTotalValue" style="color:#2e7d32;">0 BDT</span>
-                <span id="sumTotalQty" style="color:#1976d2;">0</span>
+        <div class="main-content">
+            <div class="grid">
+                <!-- Input Form -->
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-plus-circle text-blue-600"></i>
+                        <div class="card-title">নতুন এন্ট্রি যোগ করুন</div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">তারিখ</label>
+                            <input type="date" class="form-input" id="date" required>
+                        </div>
+                        <div class="form-group autocomplete">
+                            <label class="form-label">সবজি / ফল</label>
+                            <input type="text" class="form-input" id="item" placeholder="সবজির নাম লিখুন..." autocomplete="off">
+                            <div class="autocomplete-suggestions" id="itemSuggestions"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">পরিমাণ</label>
+                            <input type="number" class="form-input" id="quantity" step="0.01" min="0" placeholder="0.00">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">ইউনিট</label>
+                            <select class="form-select" id="unit">
+                                <option value="Kg">কেজি (Kg)</option>
+                                <option value="Bunches">বান্ডিল (Bunches)</option>
+                                <option value="Pcs">পিস (Pcs)</option>
+                                <option value="Bundle">বান্ডেল</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">ইউনিট প্রাইস (টাকা)</label>
+                            <input type="number" class="form-input" id="price" step="0.01" min="0" placeholder="0.00">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">লোকেশন</label>
+                            <input type="text" class="form-input" id="location" placeholder="যেমন: ৯ম তলা ডাইনিং">
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-primary" onclick="addEntry()">
+                                <span id="addBtnText"><i class="fas fa-plus"></i> এন্ট্রি যোগ করুন</span>
+                                <span id="addBtnLoading" class="loading" style="display: none;"></span>
+                            </button>
+                            <button class="btn btn-secondary" onclick="clearForm()">
+                                <i class="fas fa-times"></i> ক্লিয়ার
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Summary Panel -->
+                <div class="card summary-card">
+                    <div class="card-header">
+                        <i class="fas fa-chart-bar text-green-600"></i>
+                        <div class="card-title">মোট বিক্রয়</div>
+                    </div>
+                    <div style="padding: 2rem;">
+                        <input type="text" class="summary-search" id="summarySearch" 
+                               placeholder="সবজির নাম লিখে সার্চ করুন..." 
+                               oninput="updateSummary()">
+                        <div class="summary-stats">
+                            <div class="summary-item" id="sumItemName">আইটেম নির্বাচন করুন</div>
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <div class="stat-value stat-total" id="sumTotalValue">০ টাকা</div>
+                                    <div class="stat-label">মোট বিক্রয়</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value stat-quantity" id="sumTotalQty">০</div>
+                                    <div class="stat-label">মোট পরিমাণ</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Records Table -->
+            <div class="table-container">
+                <table id="recordsTable">
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-calendar"></i> তারিখ</th>
+                            <th><i class="fas fa-leaf"></i> সবজি</th>
+                            <th><i class="fas fa-weight-hanging"></i> পরিমাণ</th>
+                            <th>ইউনিট</th>
+                            <th><i class="fas fa-tag"></i> ইউনিট মূল্য</th>
+                            <th><i class="fas fa-map-marker-alt"></i> লোকেশন</th>
+                            <th><i class="fas fa-calculator"></i> মোট</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 
-    <table id="recordsTable">
-        <thead>
-            <tr>
-                <th>DATE</th>
-                <th>ITEM</th>
-                <th>QUANTITY</th>
-                <th>UNIT</th>
-                <th>UNIT PRICE</th>
-                <th>LOCATION</th>
-                <th>TOTAL</th>
-            </tr>
-        </thead>
-        <tbody>
-            </tbody>
-    </table>
-</div>
+    <script>
+        // বাংলাদেশি সবজি ও ফলের সম্পূর্ণ তালিকা
+        const BANGLADESHI_VEGETABLES = [
+            "পালং শাক", "লাল শাক", "কালো শাক", "ডালা শাক", "নারম শাক", "মোটা শাক", "লাউ শাক", "চালকুমড়া শাক",
+            "ঢেঁড়া শাক", "কচু শাক", "কলমি শাক", "অ্যালু বেগুন", "পটল", "চিচিঙ্গা", "জিঙ্গা", "কুমড়ো",
+            "লাউ", "চালকুমড়ো", "ঢেঁড়া", "পটকল", "শসা", "ক্যাপসিকাম", "বেগুন", "টমেটো", "লঙ্কা", "আলু",
+            "শালগম", "গাজর", "মুলা", "লাউ", "ফুলকপি", "বাঁধাকপি", "লালকপি", "ধনে পাতা", "পুদিনা পাতা",
+            "করিপাতা", "আদা", "রসুন", "পেঁয়াজ", "কাঁচা পেঁয়াজ", "ফুলকুমড়ো", "লাউ", "চালকুমড়ো", "কুমড়ো",
+            "অক্ষরোট", "ফুলগোবি", "ডাটা", "জুকা", "সিম", "বরবটি", "মটরশুটি", "লাউ", "ঢেঁড়া শাক",
+            "মুলা পাতা", "শালগম পাতা", "গাজর পাতা", "ক্যারট", "বেট", "চুকন্দর", "লেটুস", "কলমি শাক",
+            "হেলথ শাক", "অনার শাক", "জলশাক", "গাঙ্গা শাক", "শেমডুমুর", "কচু", "অলু বড়ি"
+        ];
 
-<script>
-    // ডেটা স্টোর করার জন্য অ্যারে
-    let entries = [];
-
-    // নতুন ডেটা যোগ করার ফাংশন
-    function addEntry() {
-        const date = document.getElementById('date').value;
-        const item = document.getElementById('item').value;
-        const quantity = parseFloat(document.getElementById('quantity').value) || 0;
-        const unit = document.getElementById('unit').value;
-        const price = parseFloat(document.getElementById('price').value) || 0;
-        const location = document.getElementById('location').value;
-        const total = quantity * price;
-
-        if(!date || !item) {
-            alert("দয়া করে তারিখ এবং আইটেম এর নাম দিন।");
-            return;
-        }
-
-        const newEntry = { date, item, quantity, unit, price, location, total };
-        entries.push(newEntry);
-        
-        renderTable();
-        updateSummary(); // লিস্ট আপডেট হলে সামারিও চেক করবে
-        clearInputs();
-    }
-
-    // টেবিল দেখানোর ফাংশন
-    function renderTable() {
-        const tbody = document.querySelector("#recordsTable tbody");
-        tbody.innerHTML = "";
-        entries.forEach(entry => {
-            const row = `<tr>
-                <td>${entry.date}</td>
-                <td>${entry.item}</td>
-                <td>${entry.quantity}</td>
-                <td>${entry.unit}</td>
-                <td>${entry.price} BDT</td>
-                <td>${entry.location}</td>
-                <td>${entry.total} BDT</td>
-            </tr>`;
-            tbody.innerHTML += row;
-        });
-    }
-
-    // ডান পাশের টোটাল সেল ক্যালকুলেশন ফাংশন
-    function updateSummary() {
-        const searchText = document.getElementById('summarySearch').value.toLowerCase();
-        const sumItemName = document.getElementById('sumItemName');
-        const sumTotalValue = document.getElementById('sumTotalValue');
-        const sumTotalQty = document.getElementById('sumTotalQty');
-
-        if(!searchText) {
-            sumItemName.innerText = "ITEM";
-            sumTotalValue.innerText = "0 BDT";
-            sumTotalQty.innerText = "0";
-            return;
-        }
-
-        let filteredTotal = 0;
-        let filteredQty = 0;
-        let found = false;
-
-        entries.forEach(entry => {
-            if(entry.item.toLowerCase().includes(searchText)) {
-                filteredTotal += entry.total;
-                filteredQty += entry.quantity;
-                found = true;
+        // Data Management Class
+        class SalesManager {
+            constructor() {
+                this.entries = JSON.parse(localStorage.getItem('salesEntries')) || [];
+                this.init();
             }
-        });
 
-        if(found) {
-            sumItemName.innerText = searchText.toUpperCase();
-            sumTotalValue.innerText = filteredTotal + " BDT";
-            sumTotalQty.innerText = filteredQty;
-        } else {
-            sumItemName.innerText = "NOT FOUND";
-            sumTotalValue.innerText = "0 BDT";
-            sumTotalQty.innerText = "0";
-        }
-    }
+            init() {
+                this.renderTable();
+                this.setupEventListeners();
+                this.setupAutocomplete();
+            }
 
-    // ইনপুট বক্স খালি করার ফাংশন
-    function clearInputs() {
-        document.getElementById('item').value = '';
-        document.getElementById('quantity').value = '';
-        document.getElementById('price').value = '';
-        document.getElementById('location').value = '';
-    }
-</script>
+            setupEventListeners() {
+                document.getElementById('date').valueAsDate = new Date();
+            }
 
-</body>
-</html>
+            setupAutocomplete() {
+                const itemInput = document.getElementById('item');
+                const suggestions = document.getElementById('itemSuggestions');
+
+                itemInput.addEventListener('input', (e) => {
+                    const query = e.target.value.toLowerCase();
+                    if (query.length < 2) {
+                        suggestions.style.display = 'none';
+                        return;
+                    }
+
+                    const filtered = BANGLADESHI_VEGETABLES.filter(item => 
+                        item.toLowerCase().includes(query)
+                    ).slice(0, 8);
+
+                    if (filtered.length === 0) {
+                        suggestions.style.display = 'none';
+                        return;
+                    }
+
+                    suggestions.innerHTML = filtered.map(item => 
+                        `<div class="autocomplete-item" onclick="selectItem('${item}')">${item}</div>`
+                    ).join('');
+                    suggestions.style.display = 'block';
+                });
+
+                document.addEventListener('click', (e) => {
+                    if (!itemInput.contains(e.target) && !suggestions.contains(e.target)) {
+                        suggestions.style.display = 'none';
+                    }
+                });
+            }
+
+            async addEntry() {
+                const btnText = document.getElementById('addBtnText');
+                const btnLoading = document.getElementById('addBtnLoading');
+                
+                // Show loading
+                btnText.style.display = 'none';
+                btnLoading.style.display = 'inline-block';
+
+                // Simulate API delay
+                await new Promise(resolve => setTimeout(resolve, 500));
+
+                const formData = this.getFormData();
+                if (!this.validateForm(formData)) {
+                    btnText.style.display = 'inline';
+                    btnLoading.style.display = 'none';
+                    return;
+                }
+
+                const entry = {
+                    id: Date.now(),
+                    ...formData,
+                    total: parseFloat(formData.quantity) * parseFloat(formData.price),
+                    createdAt: new Date().toISOString()
+                };
+
+                this.entrie

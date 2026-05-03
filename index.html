@@ -3,26 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zaman Agro Fisheries Ltd. - Professional Sales Management System</title>
+    <title>Zaman Agro Fisheries - Sales Manager</title>
+    <meta name="description" content="Zaman Agro Fisheries Ltd. এর জন্য Professional Sales Management System">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐟</text></svg>">
+    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --primary-color: #2563eb;
+            --primary: #2563eb;
             --primary-dark: #1d4ed8;
-            --success-color: #059669;
-            --danger-color: #dc2626;
-            --warning-color: #d97706;
-            --info-color: #0ea5e9;
-            --dark-color: #1f2937;
-            --light-color: #f8fafc;
-            --border-color: #e2e8f0;
-            --text-primary: #111827;
-            --text-secondary: #6b7280;
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-            --radius: 12px;
+            --success: #059669;
+            --danger: #dc2626;
+            --warning: #d97706;
+            --info: #0ea5e9;
+            --dark: #1f2937;
+            --light: #f8fafc;
+            --border: #e2e8f0;
+            --text: #111827;
+            --text-muted: #6b7280;
+            --shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --radius: 16px;
         }
 
         * {
@@ -32,107 +34,80 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', 'Noto Sans Bengali', system-ui, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 20px;
             line-height: 1.6;
+            padding: 1rem;
+            overflow-x: hidden;
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.97);
             backdrop-filter: blur(20px);
             border-radius: var(--radius);
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow);
             overflow: hidden;
         }
 
-        /* Header */
+        /* Header - Mobile Optimized */
         .header {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
-            padding: 2rem;
+            padding: 2rem 1.5rem;
             text-align: center;
             position: relative;
-            overflow: hidden;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-            opacity: 0.3;
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 1;
         }
 
         .header h1 {
-            font-size: 2.5rem;
+            font-size: clamp(1.5rem, 5vw, 2.2rem);
             font-weight: 700;
             margin-bottom: 0.5rem;
         }
 
         .header p {
             opacity: 0.9;
-            font-size: 1.1rem;
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
         }
 
         /* Main Content */
         .main-content {
-            padding: 2.5rem;
+            padding: 1.5rem;
         }
 
-        .grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        /* Form Card */
+        /* Cards */
         .card {
             background: white;
             border-radius: var(--radius);
-            box-shadow: var(--shadow-md);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
             overflow: hidden;
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--border);
+            margin-bottom: 1.5rem;
             transition: all 0.3s ease;
         }
 
         .card:hover {
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow);
             transform: translateY(-2px);
         }
 
         .card-header {
             background: linear-gradient(135deg, #f8fafc, #f1f5f9);
-            padding: 1.5rem 2rem;
-            border-bottom: 1px solid var(--border-color);
+            padding: 1.25rem;
+            border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
             gap: 0.75rem;
-        }
-
-        .card-title {
-            font-size: 1.25rem;
             font-weight: 600;
-            color: var(--text-primary);
         }
 
+        /* Form - Mobile Grid */
         .form-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            padding: 2rem;
+            gap: 1rem;
+            padding: 1.5rem;
         }
 
         .form-group {
@@ -142,63 +117,65 @@
         }
 
         .form-label {
-            font-size: 0.875rem;
+            font-size: 0.8rem;
             font-weight: 500;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
 
         .form-input, .form-select {
-            padding: 0.875rem 1rem;
-            border: 2px solid var(--border-color);
-            border-radius: 8px;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 12px;
             font-size: 1rem;
             transition: all 0.2s ease;
             background: white;
+            font-family: inherit;
         }
 
         .form-input:focus, .form-select:focus {
             outline: none;
-            border-color: var(--primary-color);
+            border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
 
-        /* Buttons */
+        /* Buttons - Mobile Full Width */
         .btn-group {
             display: flex;
             gap: 1rem;
-            grid-column: 1 / -1;
             margin-top: 1rem;
         }
 
         .btn {
-            padding: 0.875rem 2rem;
+            flex: 1;
+            padding: 1rem 1.5rem;
             border: none;
-            border-radius: 8px;
-            font-size: 0.95rem;
+            border-radius: 12px;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s ease;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 0.5rem;
-            flex: 1;
+            font-family: inherit;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
         }
 
-        .btn-primary:hover {
+        .btn-primary:hover, .btn-primary:active {
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
         }
 
         .btn-secondary {
             background: #f1f5f9;
-            color: var(--text-primary);
+            color: var(--text);
         }
 
         .btn-secondary:hover {
@@ -207,91 +184,81 @@
 
         /* Summary Card */
         .summary-card {
-            height: fit-content;
+            text-align: center;
         }
 
         .summary-search {
             width: 100%;
             padding: 1rem;
-            border: 2px solid var(--border-color);
-            border-radius: 8px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 1rem;
             font-size: 1rem;
-            margin-bottom: 1.5rem;
-            background: white;
-        }
-
-        .summary-search:focus {
-            outline: none;
-            border-color: var(--info-color);
-            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
         }
 
         .summary-stats {
             background: linear-gradient(135deg, #fef3c7, #fde68a);
-            padding: 2rem;
-            border-radius: 12px;
-            text-align: center;
+            padding: 1.5rem;
+            border-radius: 16px;
             border: 1px solid rgba(202, 138, 4, 0.2);
         }
 
         .summary-item {
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             font-weight: 700;
-            color: var(--warning-color);
+            color: var(--warning);
             margin-bottom: 1rem;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
         }
 
         .stats-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin-top: 1rem;
+            grid-template-columns: 1fr;
+            gap: 1rem;
         }
 
-        .stat-item {
-            text-align: center;
+        @media (min-width: 640px) {
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
         .stat-value {
-            font-size: 1.75rem;
+            font-size: 1.8rem;
             font-weight: 700;
             margin-bottom: 0.25rem;
         }
 
-        .stat-total { color: var(--success-color); }
-        .stat-quantity { color: var(--info-color); }
-
-        /* Table */
+        /* Table - Mobile Optimized */
         .table-container {
-            background: white;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
             border-radius: var(--radius);
-            box-shadow: var(--shadow-md);
-            overflow: hidden;
-            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
+            min-width: 700px;
+        }
+
+        th, td {
+            padding: 1rem 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
         }
 
         th {
             background: linear-gradient(135deg, #f8fafc, #f1f5f9);
-            padding: 1.25rem 1rem;
-            text-align: left;
             font-weight: 600;
-            font-size: 0.875rem;
-            color: var(--text-secondary);
+            font-size: 0.8rem;
+            color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            border-bottom: 2px solid var(--border-color);
-        }
-
-        td {
-            padding: 1.25rem 1rem;
-            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
 
         tr:hover {
@@ -300,168 +267,191 @@
 
         .total-cell {
             font-weight: 600;
-            color: var(--success-color);
+            color: var(--success);
+            text-align: right;
         }
 
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            body {
-                padding: 1rem;
-            }
-            
-            .main-content {
-                padding: 1.5rem;
-            }
-            
-            .form-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-            
-            .header h1 {
-                font-size: 2rem;
-            }
-        }
-
-        /* Loading Animation */
+        /* Loading */
         .loading {
-            display: inline-block;
             width: 20px;
             height: 20px;
             border: 3px solid rgba(255,255,255,.3);
             border-radius: 50%;
             border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
+            animation: spin 1s linear infinite;
         }
 
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
 
-        /* Auto-suggest Dropdown */
-        .autocomplete {
-            position: relative;
-        }
-
+        /* Autocomplete */
         .autocomplete-suggestions {
             position: absolute;
             top: 100%;
             left: 0;
             right: 0;
             background: white;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
             max-height: 200px;
             overflow-y: auto;
             z-index: 1000;
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow);
             display: none;
         }
 
         .autocomplete-item {
-            padding: 0.75rem 1rem;
+            padding: 1rem;
             cursor: pointer;
-            border-bottom: 1px solid var(--border-color);
-            transition: background-color 0.2s ease;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.2s ease;
+            font-size: 1rem;
         }
 
-        .autocomplete-item:hover,
-        .autocomplete-item.selected {
+        .autocomplete-item:hover {
             background: #f8fafc;
         }
 
-        .autocomplete-item:last-child {
-            border-bottom: none;
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-muted);
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            color: white;
+            font-weight: 500;
+            z-index: 10000;
+            transform: translateX(400px);
+            transition: all 0.3s ease;
+            max-width: 90vw;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background: #10b981;
+        }
+
+        .notification.error {
+            background: #ef4444;
+        }
+
+        /* PWA Support */
+        @media (display-mode: standalone) {
+            body { padding: 0.5rem; }
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            body { padding: 0.75rem; }
+            .main-content { padding: 1rem; }
+            .form-grid { grid-template-columns: 1fr; }
+            .btn-group { flex-direction: column; }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Header -->
         <div class="header">
-            <div class="header-content">
-                <h1><i class="fas fa-fish"></i> Zaman Agro Fisheries Ltd.</h1>
-                <p>Professional Sales Management System</p>
-            </div>
+            <h1><i class="fas fa-fish"></i> Zaman Agro Fisheries</h1>
+            <p>🛒 Professional Sales Manager</p>
         </div>
 
         <div class="main-content">
-            <div class="grid">
-                <!-- Input Form -->
-                <div class="card">
-                    <div class="card-header">
-                        <i class="fas fa-plus-circle text-blue-600"></i>
-                        <div class="card-title">নতুন এন্ট্রি যোগ করুন</div>
+            <!-- Add Entry Form -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-plus-circle" style="color: var(--primary);"></i>
+                    <span>নতুন এন্ট্রি যোগ করুন</span>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>📅 তারিখ</label>
+                        <input type="date" id="date" required>
                     </div>
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label class="form-label">তারিখ</label>
-                            <input type="date" class="form-input" id="date" required>
-                        </div>
-                        <div class="form-group autocomplete">
-                            <label class="form-label">সবজি / ফল</label>
-                            <input type="text" class="form-input" id="item" placeholder="সবজির নাম লিখুন..." autocomplete="off">
-                            <div class="autocomplete-suggestions" id="itemSuggestions"></div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">পরিমাণ</label>
-                            <input type="number" class="form-input" id="quantity" step="0.01" min="0" placeholder="0.00">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">ইউনিট</label>
-                            <select class="form-select" id="unit">
-                                <option value="Kg">কেজি (Kg)</option>
-                                <option value="Bunches">বান্ডিল (Bunches)</option>
-                                <option value="Pcs">পিস (Pcs)</option>
-                                <option value="Bundle">বান্ডেল</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">ইউনিট প্রাইস (টাকা)</label>
-                            <input type="number" class="form-input" id="price" step="0.01" min="0" placeholder="0.00">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">লোকেশন</label>
-                            <input type="text" class="form-input" id="location" placeholder="যেমন: ৯ম তলা ডাইনিং">
-                        </div>
-                        <div class="btn-group">
-                            <button class="btn btn-primary" onclick="addEntry()">
-                                <span id="addBtnText"><i class="fas fa-plus"></i> এন্ট্রি যোগ করুন</span>
-                                <span id="addBtnLoading" class="loading" style="display: none;"></span>
-                            </button>
-                            <button class="btn btn-secondary" onclick="clearForm()">
-                                <i class="fas fa-times"></i> ক্লিয়ার
-                            </button>
-                        </div>
+                    
+                    <div class="form-group" style="position: relative;">
+                        <label>🥬 সবজি / ফল</label>
+                        <input type="text" id="item" placeholder="সবজির নাম লিখুন..." autocomplete="off">
+                        <div class="autocomplete-suggestions" id="itemSuggestions"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>📦 পরিমাণ</label>
+                        <input type="number" id="quantity" step="0.01" min="0" placeholder="0.00">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>⚖️ ইউনিট</label>
+                        <select id="unit">
+                            <option value="Kg">কেজি (Kg)</option>
+                            <option value="Bunches">বান্ডিল</option>
+                            <option value="Pcs">পিস</option>
+                            <option value="Bundle">বান্ডেল</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>💰 ইউনিট প্রাইস</label>
+                        <input type="number" id="price" step="0.01" min="0" placeholder="0.00">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>📍 লোকেশন</label>
+                        <input type="text" id="location" placeholder="যেমন: ৯ম তলা">
+                    </div>
+                    
+                    <div class="btn-group">
+                        <button class="btn btn-primary" onclick="addEntry()">
+                            <span id="addBtnText"><i class="fas fa-plus"></i> যোগ করুন</span>
+                            <span id="addBtnLoading" class="loading" style="display: none;"></span>
+                        </button>
+                        <button class="btn btn-secondary" onclick="clearForm()">
+                            <i class="fas fa-times"></i> ক্লিয়ার
+                        </button>
                     </div>
                 </div>
+            </div>
 
-                <!-- Summary Panel -->
-                <div class="card summary-card">
-                    <div class="card-header">
-                        <i class="fas fa-chart-bar text-green-600"></i>
-                        <div class="card-title">মোট বিক্রয়</div>
-                    </div>
-                    <div style="padding: 2rem;">
-                        <input type="text" class="summary-search" id="summarySearch" 
-                               placeholder="সবজির নাম লিখে সার্চ করুন..." 
-                               oninput="updateSummary()">
-                        <div class="summary-stats">
-                            <div class="summary-item" id="sumItemName">আইটেম নির্বাচন করুন</div>
-                            <div class="stats-grid">
-                                <div class="stat-item">
-                                    <div class="stat-value stat-total" id="sumTotalValue">০ টাকা</div>
-                                    <div class="stat-label">মোট বিক্রয়</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-value stat-quantity" id="sumTotalQty">০</div>
-                                    <div class="stat-label">মোট পরিমাণ</div>
-                                </div>
+            <!-- Summary -->
+            <div class="card summary-card">
+                <div class="card-header">
+                    <i class="fas fa-chart-bar" style="color: var(--success);"></i>
+                    <span>📊 মোট বিক্রয়</span>
+                </div>
+                <div style="padding: 1.5rem;">
+                    <input type="text" class="summary-search" id="summarySearch" 
+                           placeholder="🔍 সবজির নাম লিখে সার্চ করুন..." 
+                           oninput="updateSummary()">
+                    
+                    <div class="summary-stats">
+                        <div class="summary-item" id="sumItemName">এখনো এন্ট্রি নেই</div>
+                        <div class="stats-grid">
+                            <div>
+                                <div class="stat-value" id="sumTotalValue" style="color: var(--success);">০ টাকা</div>
+                                <div style="font-size: 0.9rem; color: var(--text-muted);">মোট বিক্রয়</div>
+                            </div>
+                            <div>
+                                <div class="stat-value" id="sumTotalQty" style="color: var(--info);">০</div>
+                                <div style="font-size: 0.9rem; color: var(--text-muted);">মোট পরিমাণ</div>
                             </div>
                         </div>
                     </div>
@@ -469,112 +459,145 @@
             </div>
 
             <!-- Records Table -->
-            <div class="table-container">
-                <table id="recordsTable">
-                    <thead>
-                        <tr>
-                            <th><i class="fas fa-calendar"></i> তারিখ</th>
-                            <th><i class="fas fa-leaf"></i> সবজি</th>
-                            <th><i class="fas fa-weight-hanging"></i> পরিমাণ</th>
-                            <th>ইউনিট</th>
-                            <th><i class="fas fa-tag"></i> ইউনিট মূল্য</th>
-                            <th><i class="fas fa-map-marker-alt"></i> লোকেশন</th>
-                            <th><i class="fas fa-calculator"></i> মোট</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tableBody">
-                    </tbody>
-                </table>
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-list"></i>
+                    <span>📋 সকল এন্ট্রি ( <span id="totalEntries">0</span> )</span>
+                </div>
+                <div class="table-container">
+                    <table id="recordsTable">
+                        <thead>
+                            <tr>
+                                <th>📅 তারিখ</th>
+                                <th>🥬 সবজি</th>
+                                <th>📦 পরিমাণ</th>
+                                <th>⚖️</th>
+                                <th>💰 ইউনিট</th>
+                                <th>📍</th>
+                                <th>💵 মোট</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // বাংলাদেশি সবজি ও ফলের সম্পূর্ণ তালিকা
-        const BANGLADESHI_VEGETABLES = [
-            "পালং শাক", "লাল শাক", "কালো শাক", "ডালা শাক", "নারম শাক", "মোটা শাক", "লাউ শাক", "চালকুমড়া শাক",
-            "ঢেঁড়া শাক", "কচু শাক", "কলমি শাক", "অ্যালু বেগুন", "পটল", "চিচিঙ্গা", "জিঙ্গা", "কুমড়ো",
-            "লাউ", "চালকুমড়ো", "ঢেঁড়া", "পটকল", "শসা", "ক্যাপসিকাম", "বেগুন", "টমেটো", "লঙ্কা", "আলু",
-            "শালগম", "গাজর", "মুলা", "লাউ", "ফুলকপি", "বাঁধাকপি", "লালকপি", "ধনে পাতা", "পুদিনা পাতা",
-            "করিপাতা", "আদা", "রসুন", "পেঁয়াজ", "কাঁচা পেঁয়াজ", "ফুলকুমড়ো", "লাউ", "চালকুমড়ো", "কুমড়ো",
-            "অক্ষরোট", "ফুলগোবি", "ডাটা", "জুকা", "সিম", "বরবটি", "মটরশুটি", "লাউ", "ঢেঁড়া শাক",
-            "মুলা পাতা", "শালগম পাতা", "গাজর পাতা", "ক্যারট", "বেট", "চুকন্দর", "লেটুস", "কলমি শাক",
-            "হেলথ শাক", "অনার শাক", "জলশাক", "গাঙ্গা শাক", "শেমডুমুর", "কচু", "অলু বড়ি"
+        // বাংলাদেশি সবজি ও ফলের তালিকা
+        const VEGETABLES = [
+            "পালং শাক", "লাল শাক", "কালো শাক", "ডালা শাক", "নারম শাক", "লাউ শাক", "চালকুমড়া শাক",
+            "ঢেঁড়া শাক", "কচু শাক", "কলমি শাক", "অ্যালুবেগুন", "পটল", "চিচিঙ্গা", "জিঙ্গা", 
+            "কুমড়ো", "লাউ", "চালকুমড়ো", "ঢেঁড়া", "শসা", "ক্যাপসিকাম", "বেগুন", "টমেটো", 
+            "লঙ্কা", "আলু", "শালগম", "গাজর", "মুলা", "ফুলকপি", "বাঁধাকপি", "ধনে পাতা",
+            "আদা", "রসুন", "পেঁয়াজ", "ফুলকুমড়ো", "ফুলগোবি", "সিম", "বরবটি", "মটরশুটি"
         ];
 
-        // Data Management Class
         class SalesManager {
             constructor() {
-                this.entries = JSON.parse(localStorage.getItem('salesEntries')) || [];
+                this.entries = JSON.parse(localStorage.getItem('salesEntries') || '[]');
                 this.init();
             }
 
             init() {
+                this.setTodayDate();
                 this.renderTable();
-                this.setupEventListeners();
                 this.setupAutocomplete();
+                this.updateSummary();
             }
 
-            setupEventListeners() {
+            setTodayDate() {
                 document.getElementById('date').valueAsDate = new Date();
             }
 
             setupAutocomplete() {
-                const itemInput = document.getElementById('item');
+                const input = document.getElementById('item');
                 const suggestions = document.getElementById('itemSuggestions');
 
-                itemInput.addEventListener('input', (e) => {
+                input.addEventListener('input', (e) => {
                     const query = e.target.value.toLowerCase();
                     if (query.length < 2) {
                         suggestions.style.display = 'none';
                         return;
                     }
 
-                    const filtered = BANGLADESHI_VEGETABLES.filter(item => 
+                    const filtered = VEGETABLES.filter(item => 
                         item.toLowerCase().includes(query)
-                    ).slice(0, 8);
-
-                    if (filtered.length === 0) {
-                        suggestions.style.display = 'none';
-                        return;
-                    }
+                    ).slice(0, 6);
 
                     suggestions.innerHTML = filtered.map(item => 
-                        `<div class="autocomplete-item" onclick="selectItem('${item}')">${item}</div>`
+                        `<div class="autocomplete-item" onclick="app.selectItem('${item}')">${item}</div>`
                     ).join('');
-                    suggestions.style.display = 'block';
+                    suggestions.style.display = filtered.length ? 'block' : 'none';
                 });
 
+                // Close suggestions on outside click
                 document.addEventListener('click', (e) => {
-                    if (!itemInput.contains(e.target) && !suggestions.contains(e.target)) {
+                    if (!input.contains(e.target) && !suggestions.contains(e.target)) {
                         suggestions.style.display = 'none';
                     }
                 });
             }
 
+            selectItem(item) {
+                document.getElementById('item').value = item;
+                document.getElementById('itemSuggestions').style.display = 'none';
+            }
+
             async addEntry() {
                 const btnText = document.getElementById('addBtnText');
                 const btnLoading = document.getElementById('addBtnLoading');
-                
-                // Show loading
+
                 btnText.style.display = 'none';
                 btnLoading.style.display = 'inline-block';
 
-                // Simulate API delay
-                await new Promise(resolve => setTimeout(resolve, 500));
+                await new Promise(r => setTimeout(r, 300));
 
-                const formData = this.getFormData();
-                if (!this.validateForm(formData)) {
-                    btnText.style.display = 'inline';
-                    btnLoading.style.display = 'none';
-                    return;
-                }
+                const data = this.getFormData();
+                if (!this.validate(data)) return this.resetBtn(btnText, btnLoading);
 
                 const entry = {
                     id: Date.now(),
-                    ...formData,
-                    total: parseFloat(formData.quantity) * parseFloat(formData.price),
+                    ...data,
+                    total: (parseFloat(data.quantity) * parseFloat(data.price)).toFixed(2),
                     createdAt: new Date().toISOString()
                 };
 
-                this.entrie
+                this.entries.unshift(entry);
+                localStorage.setItem('salesEntries', JSON.stringify(this.entries));
+                
+                this.renderTable();
+                this.updateSummary();
+                this.clearForm();
+                this.showNotification('✅ এন্ট্রি সফলভাবে যোগ হয়েছে!', 'success');
+                
+                this.resetBtn(btnText, btnLoading);
+            }
+
+            getFormData() {
+                return {
+                    date: document.getElementById('date').value,
+                    item: document.getElementById('item').value.trim(),
+                    quantity: document.getElementById('quantity').value,
+                    unit: document.getElementById('unit').value,
+                    price: document.getElementById('price').value,
+                    location: document.getElementById('location').value.trim()
+                };
+            }
+
+            validate(data) {
+                if (!data.date || !data.item || !data.quantity || !data.price) {
+                    this.showNotification('❌ সকল 필্ড পূরণ করুন!', 'error');
+                    return false;
+                }
+                if (parseFloat(data.quantity) <= 0 || parseFloat(data.price) <= 0) {
+                    this.showNotification('❌ পরিমাণ ও দাম ০ এর বেশি হতে হবে!', 'error');
+                    return false;
+                }
+                return true;
+            }
+
+            resetBtn(textEl, loadingEl) {
+                textEl.style.display = 'inline';
+                loadingEl

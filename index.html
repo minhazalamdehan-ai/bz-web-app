@@ -3,601 +3,264 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zaman Agro Fisheries - Sales Manager</title>
-    <meta name="description" content="Zaman Agro Fisheries Ltd. এর জন্য Professional Sales Management System">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐟</text></svg>">
-    
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+    <title>Consistency = Success</title>
     <style>
         :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --success: #059669;
-            --danger: #dc2626;
-            --warning: #d97706;
-            --info: #0ea5e9;
-            --dark: #1f2937;
-            --light: #f8fafc;
-            --border: #e2e8f0;
-            --text: #111827;
-            --text-muted: #6b7280;
-            --shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-            --radius: 16px;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            --bg-color: #0f0f0f;
+            --card-bg: #1a1a1a;
+            --text-color: #e0e0e0;
+            --primary: #f39c12;
+            --success: #2ecc71;
+            --danger: #e74c3c;
+            --border: #333;
         }
 
         body {
-            font-family: 'Inter', 'Noto Sans Bengali', system-ui, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            line-height: 1.6;
-            padding: 1rem;
-            overflow-x: hidden;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: 15px;
+            margin: 0;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.97);
-            backdrop-filter: blur(20px);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            overflow: hidden;
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 { text-align: center; color: var(--primary); margin-bottom: 5px; text-transform: uppercase; }
+        .subtitle { text-align: center; color: #888; margin-bottom: 25px; font-size: 0.9em; }
+
+        /* Dashboard */
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
         }
 
-        /* Header - Mobile Optimized */
-        .header {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            padding: 2rem 1.5rem;
-            text-align: center;
-            position: relative;
-        }
-
-        .header h1 {
-            font-size: clamp(1.5rem, 5vw, 2.2rem);
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .header p {
-            opacity: 0.9;
-            font-size: clamp(0.9rem, 3vw, 1.1rem);
-        }
-
-        /* Main Content */
-        .main-content {
-            padding: 1.5rem;
-        }
-
-        /* Cards */
         .card {
-            background: white;
-            border-radius: var(--radius);
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-            overflow: hidden;
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 10px;
             border: 1px solid var(--border);
-            margin-bottom: 1.5rem;
-            transition: all 0.3s ease;
+            text-align: center;
         }
 
-        .card:hover {
-            box-shadow: var(--shadow);
-            transform: translateY(-2px);
+        .card h3 { margin: 0; font-size: 14px; color: #888; }
+        .card p { margin: 10px 0 0 0; font-size: 22px; font-weight: bold; }
+
+        /* Form */
+        .form-section {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            margin-bottom: 25px;
         }
 
-        .card-header {
-            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
-            padding: 1.25rem;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-weight: 600;
-        }
-
-        /* Form - Mobile Grid */
         .form-grid {
             display: grid;
-            gap: 1rem;
-            padding: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
         }
 
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
+        label { font-size: 12px; color: #aaa; display: block; margin-bottom: 5px; }
+        input, select {
+            width: 100%; padding: 10px; background: #252525; border: 1px solid var(--border);
+            color: #fff; border-radius: 5px; box-sizing: border-box;
         }
 
-        .form-label {
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
+        .btn-group { display: flex; gap: 10px; margin-top: 15px; }
+        button { flex: 1; padding: 12px; font-weight: bold; border: none; border-radius: 5px; cursor: pointer; }
+        .btn-add { background: var(--primary); color: #000; }
+        .btn-export { background: #444; color: #fff; }
 
-        .form-input, .form-select {
-            padding: 1rem;
-            border: 2px solid var(--border);
-            border-radius: 12px;
-            font-size: 1rem;
-            transition: all 0.2s ease;
-            background: white;
-            font-family: inherit;
-        }
+        /* Table */
+        .table-container { background: var(--card-bg); border-radius: 10px; overflow-x: auto; border: 1px solid var(--border); }
+        table { width: 100%; border-collapse: collapse; min-width: 900px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border); font-size: 14px; }
+        th { background: #222; color: #888; }
 
-        .form-input:focus, .form-select:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
+        .profit { color: var(--success); }
+        .loss { color: var(--danger); }
+        .badge { padding: 3px 7px; border-radius: 4px; font-size: 11px; font-weight: bold; }
+        .badge-buy { background: rgba(46, 204, 113, 0.2); color: var(--success); }
+        .badge-sell { background: rgba(231, 76, 60, 0.2); color: var(--danger); }
 
-        /* Buttons - Mobile Full Width */
-        .btn-group {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .btn {
-            flex: 1;
-            padding: 1rem 1.5rem;
-            border: none;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            font-family: inherit;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-        }
-
-        .btn-primary:hover, .btn-primary:active {
-            transform: translateY(-1px);
-            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
-        }
-
-        .btn-secondary {
-            background: #f1f5f9;
-            color: var(--text);
-        }
-
-        .btn-secondary:hover {
-            background: #e2e8f0;
-        }
-
-        /* Summary Card */
-        .summary-card {
-            text-align: center;
-        }
-
-        .summary-search {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid var(--border);
-            border-radius: 12px;
-            margin-bottom: 1rem;
-            font-size: 1rem;
-        }
-
-        .summary-stats {
-            background: linear-gradient(135deg, #fef3c7, #fde68a);
-            padding: 1.5rem;
-            border-radius: 16px;
-            border: 1px solid rgba(202, 138, 4, 0.2);
-        }
-
-        .summary-item {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--warning);
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
-        }
-
-        @media (min-width: 640px) {
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        .stat-value {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 0.25rem;
-        }
-
-        /* Table - Mobile Optimized */
-        .table-container {
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            border-radius: var(--radius);
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 700px;
-        }
-
-        th, td {
-            padding: 1rem 0.75rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border);
-        }
-
-        th {
-            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
-            font-weight: 600;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-
-        tr:hover {
-            background: #f8fafc;
-        }
-
-        .total-cell {
-            font-weight: 600;
-            color: var(--success);
-            text-align: right;
-        }
-
-        /* Loading */
-        .loading {
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Autocomplete */
-        .autocomplete-suggestions {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            max-height: 200px;
-            overflow-y: auto;
-            z-index: 1000;
-            box-shadow: var(--shadow);
-            display: none;
-        }
-
-        .autocomplete-item {
-            padding: 1rem;
-            cursor: pointer;
-            border-bottom: 1px solid var(--border);
-            transition: background 0.2s ease;
-            font-size: 1rem;
-        }
-
-        .autocomplete-item:hover {
-            background: #f8fafc;
-        }
-
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 3rem 1rem;
-            color: var(--text-muted);
-        }
-
-        .empty-state i {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            opacity: 0.5;
-        }
-
-        /* Notification */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 1rem 1.5rem;
-            border-radius: 12px;
-            color: white;
-            font-weight: 500;
-            z-index: 10000;
-            transform: translateX(400px);
-            transition: all 0.3s ease;
-            max-width: 90vw;
-        }
-
-        .notification.show {
-            transform: translateX(0);
-        }
-
-        .notification.success {
-            background: #10b981;
-        }
-
-        .notification.error {
-            background: #ef4444;
-        }
-
-        /* PWA Support */
-        @media (display-mode: standalone) {
-            body { padding: 0.5rem; }
-        }
-
-        /* Responsive */
-        @media (max-width: 640px) {
-            body { padding: 0.75rem; }
-            .main-content { padding: 1rem; }
-            .form-grid { grid-template-columns: 1fr; }
-            .btn-group { flex-direction: column; }
-        }
+        .action-btns { display: flex; gap: 5px; }
+        .edit-btn { background: #3498db; color: white; padding: 5px 8px; border-radius: 3px; font-size: 12px; border:none; cursor:pointer;}
+        .del-btn { background: var(--danger); color: white; padding: 5px 8px; border-radius: 3px; font-size: 12px; border:none; cursor:pointer;}
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <h1><i class="fas fa-fish"></i> Zaman Agro Fisheries</h1>
-            <p>🛒 Professional Sales Manager</p>
-        </div>
 
-        <div class="main-content">
-            <!-- Add Entry Form -->
-            <div class="card">
-                <div class="card-header">
-                    <i class="fas fa-plus-circle" style="color: var(--primary);"></i>
-                    <span>নতুন এন্ট্রি যোগ করুন</span>
-                </div>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>📅 তারিখ</label>
-                        <input type="date" id="date" required>
-                    </div>
-                    
-                    <div class="form-group" style="position: relative;">
-                        <label>🥬 সবজি / ফল</label>
-                        <input type="text" id="item" placeholder="সবজির নাম লিখুন..." autocomplete="off">
-                        <div class="autocomplete-suggestions" id="itemSuggestions"></div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>📦 পরিমাণ</label>
-                        <input type="number" id="quantity" step="0.01" min="0" placeholder="0.00">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>⚖️ ইউনিট</label>
-                        <select id="unit">
-                            <option value="Kg">কেজি (Kg)</option>
-                            <option value="Bunches">বান্ডিল</option>
-                            <option value="Pcs">পিস</option>
-                            <option value="Bundle">বান্ডেল</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>💰 ইউনিট প্রাইস</label>
-                        <input type="number" id="price" step="0.01" min="0" placeholder="0.00">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>📍 লোকেশন</label>
-                        <input type="text" id="location" placeholder="যেমন: ৯ম তলা">
-                    </div>
-                    
-                    <div class="btn-group">
-                        <button class="btn btn-primary" onclick="addEntry()">
-                            <span id="addBtnText"><i class="fas fa-plus"></i> যোগ করুন</span>
-                            <span id="addBtnLoading" class="loading" style="display: none;"></span>
-                        </button>
-                        <button class="btn btn-secondary" onclick="clearForm()">
-                            <i class="fas fa-times"></i> ক্লিয়ার
-                        </button>
-                    </div>
-                </div>
-            </div>
+<div class="container">
+    <h1>Consistency = Success</h1>
+    <div class="subtitle">Advanced Crypto Trading Journal</div>
 
-            <!-- Summary -->
-            <div class="card summary-card">
-                <div class="card-header">
-                    <i class="fas fa-chart-bar" style="color: var(--success);"></i>
-                    <span>📊 মোট বিক্রয়</span>
-                </div>
-                <div style="padding: 1.5rem;">
-                    <input type="text" class="summary-search" id="summarySearch" 
-                           placeholder="🔍 সবজির নাম লিখে সার্চ করুন..." 
-                           oninput="updateSummary()">
-                    
-                    <div class="summary-stats">
-                        <div class="summary-item" id="sumItemName">এখনো এন্ট্রি নেই</div>
-                        <div class="stats-grid">
-                            <div>
-                                <div class="stat-value" id="sumTotalValue" style="color: var(--success);">০ টাকা</div>
-                                <div style="font-size: 0.9rem; color: var(--text-muted);">মোট বিক্রয়</div>
-                            </div>
-                            <div>
-                                <div class="stat-value" id="sumTotalQty" style="color: var(--info);">০</div>
-                                <div style="font-size: 0.9rem; color: var(--text-muted);">মোট পরিমাণ</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Records Table -->
-            <div class="card">
-                <div class="card-header">
-                    <i class="fas fa-list"></i>
-                    <span>📋 সকল এন্ট্রি ( <span id="totalEntries">0</span> )</span>
-                </div>
-                <div class="table-container">
-                    <table id="recordsTable">
-                        <thead>
-                            <tr>
-                                <th>📅 তারিখ</th>
-                                <th>🥬 সবজি</th>
-                                <th>📦 পরিমাণ</th>
-                                <th>⚖️</th>
-                                <th>💰 ইউনিট</th>
-                                <th>📍</th>
-                                <th>💵 মোট</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tableBody"></tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+    <div class="dashboard">
+        <div class="card"><h3>মোট ট্রেড</h3><p id="stat-total">0</p></div>
+        <div class="card"><h3>উইন (Win)</h3><p id="stat-win" class="profit">0</p></div>
+        <div class="card"><h3>লস (Loss)</h3><p id="stat-loss" class="loss">0</p></div>
+        <div class="card"><h3>উইন রেট</h3><p id="stat-rate" style="color:var(--primary)">0%</p></div>
+        <div class="card"><h3>মোট প্রফিট</h3><p id="stat-pnl">$0.00</p></div>
     </div>
 
-    <script>
-        // বাংলাদেশি সবজি ও ফলের তালিকা
-        const VEGETABLES = [
-            "পালং শাক", "লাল শাক", "কালো শাক", "ডালা শাক", "নারম শাক", "লাউ শাক", "চালকুমড়া শাক",
-            "ঢেঁড়া শাক", "কচু শাক", "কলমি শাক", "অ্যালুবেগুন", "পটল", "চিচিঙ্গা", "জিঙ্গা", 
-            "কুমড়ো", "লাউ", "চালকুমড়ো", "ঢেঁড়া", "শসা", "ক্যাপসিকাম", "বেগুন", "টমেটো", 
-            "লঙ্কা", "আলু", "শালগম", "গাজর", "মুলা", "ফুলকপি", "বাঁধাকপি", "ধনে পাতা",
-            "আদা", "রসুন", "পেঁয়াজ", "ফুলকুমড়ো", "ফুলগোবি", "সিম", "বরবটি", "মটরশুটি"
-        ];
+    <div class="form-section">
+        <form id="trade-form">
+            <input type="hidden" id="edit-id">
+            <div class="form-grid">
+                <div><label>কয়েন</label><input type="text" id="coin" placeholder="BTC" required></div>
+                <div><label>টাইপ</label><select id="type"><option value="BUY">BUY (Long)</option><option value="SELL">SELL (Short)</option></select></div>
+                <div><label>এন্ট্রি ($)</label><input type="number" id="entry" step="any" required></div>
+                <div><label>এক্সিট ($)</label><input type="number" id="exit" step="any" required></div>
+                <div><label>স্টপ লস ($)</label><input type="number" id="sl" step="any" placeholder="RR হিসাবের জন্য"></div>
+                <div><label>লিভারেজ</label><input type="number" id="lev" value="1" required></div>
+                <div><label>ইনভেস্ট ($)</label><input type="number" id="inv" required></div>
+                <div><label>তারিখ</label><input type="date" id="date" required></div>
+            </div>
+            <div class="btn-group">
+                <button type="submit" class="btn-add" id="submit-btn">জার্নালে যোগ করুন</button>
+                <button type="button" class="btn-export" onclick="exportCSV()">Backup (CSV)</button>
+            </div>
+        </form>
+    </div>
 
-        class SalesManager {
-            constructor() {
-                this.entries = JSON.parse(localStorage.getItem('salesEntries') || '[]');
-                this.init();
-            }
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>তারিখ</th>
+                    <th>কয়েন</th>
+                    <th>টাইপ</th>
+                    <th>এন্ট্রি/এক্সিট</th>
+                    <th>RR</th>
+                    <th>লাভ/লস ($)</th>
+                    <th>শতকরা (%)</th>
+                    <th>অ্যাকশন</th>
+                </tr>
+            </thead>
+            <tbody id="trade-list"></tbody>
+        </table>
+    </div>
+</div>
 
-            init() {
-                this.setTodayDate();
-                this.renderTable();
-                this.setupAutocomplete();
-                this.updateSummary();
-            }
+<script>
+    let trades = JSON.parse(localStorage.getItem('my_crypto_journal_v3')) || [];
 
-            setTodayDate() {
-                document.getElementById('date').valueAsDate = new Date();
-            }
+    const form = document.getElementById('trade-form');
+    document.getElementById('date').valueAsDate = new Date();
 
-            setupAutocomplete() {
-                const input = document.getElementById('item');
-                const suggestions = document.getElementById('itemSuggestions');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const id = document.getElementById('edit-id').value;
+        
+        const tradeData = {
+            id: id ? parseInt(id) : Date.now(),
+            date: document.getElementById('date').value,
+            coin: document.getElementById('coin').value.toUpperCase(),
+            type: document.getElementById('type').value,
+            entry: parseFloat(document.getElementById('entry').value),
+            exit: parseFloat(document.getElementById('exit').value),
+            sl: parseFloat(document.getElementById('sl').value) || 0,
+            lev: parseFloat(document.getElementById('lev').value),
+            inv: parseFloat(document.getElementById('inv').value)
+        };
 
-                input.addEventListener('input', (e) => {
-                    const query = e.target.value.toLowerCase();
-                    if (query.length < 2) {
-                        suggestions.style.display = 'none';
-                        return;
-                    }
+        // Calculation
+        let rawPct = (tradeData.type === 'BUY') 
+            ? ((tradeData.exit - tradeData.entry) / tradeData.entry) 
+            : ((tradeData.entry - tradeData.exit) / tradeData.entry);
+        
+        tradeData.pct = rawPct * 100 * tradeData.lev;
+        tradeData.pnl = (tradeData.inv * tradeData.pct) / 100;
 
-                    const filtered = VEGETABLES.filter(item => 
-                        item.toLowerCase().includes(query)
-                    ).slice(0, 6);
+        // RR Calculation: (Target - Entry) / (Entry - StopLoss)
+        if(tradeData.sl > 0 && tradeData.sl !== tradeData.entry) {
+            let risk = Math.abs(tradeData.entry - tradeData.sl);
+            let reward = Math.abs(tradeData.exit - tradeData.entry);
+            tradeData.rr = (reward / risk).toFixed(2);
+        } else { tradeData.rr = "N/A"; }
 
-                    suggestions.innerHTML = filtered.map(item => 
-                        `<div class="autocomplete-item" onclick="app.selectItem('${item}')">${item}</div>`
-                    ).join('');
-                    suggestions.style.display = filtered.length ? 'block' : 'none';
-                });
+        if(id) {
+            trades = trades.map(t => t.id === parseInt(id) ? tradeData : t);
+            document.getElementById('submit-btn').innerText = "জার্নালে যোগ করুন";
+            document.getElementById('edit-id').value = "";
+        } else {
+            trades.push(tradeData);
+        }
 
-                // Close suggestions on outside click
-                document.addEventListener('click', (e) => {
-                    if (!input.contains(e.target) && !suggestions.contains(e.target)) {
-                        suggestions.style.display = 'none';
-                    }
-                });
-            }
+        saveAndRender();
+        form.reset();
+        document.getElementById('date').valueAsDate = new Date();
+    });
 
-            selectItem(item) {
-                document.getElementById('item').value = item;
-                document.getElementById('itemSuggestions').style.display = 'none';
-            }
+    function saveAndRender() {
+        localStorage.setItem('my_crypto_journal_v3', JSON.stringify(trades));
+        render();
+    }
 
-            async addEntry() {
-                const btnText = document.getElementById('addBtnText');
-                const btnLoading = document.getElementById('addBtnLoading');
+    function render() {
+        const list = document.getElementById('trade-list');
+        list.innerHTML = "";
+        let win = 0, loss = 0, totalPnl = 0;
 
-                btnText.style.display = 'none';
-                btnLoading.style.display = 'inline-block';
+        trades.sort((a,b) => new Date(b.date) - new Date(a.date)).forEach(t => {
+            totalPnl += t.pnl;
+            if(t.pnl > 0) win++; else if(t.pnl < 0) loss++;
 
-                await new Promise(r => setTimeout(r, 300));
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${t.date}</td>
+                <td><b>${t.coin}</b> <small>${t.lev}x</small></td>
+                <td><span class="badge ${t.type==='BUY'?'badge-buy':'badge-sell'}">${t.type}</span></td>
+                <td>${t.entry} / ${t.exit}</td>
+                <td>1:${t.rr}</td>
+                <td class="${t.pnl>=0?'profit':'loss'}">${t.pnl>=0?'+':''}${t.pnl.toFixed(2)}</td>
+                <td class="${t.pnl>=0?'profit':'loss'}">${t.pct.toFixed(2)}%</td>
+                <td class="action-btns">
+                    <button class="edit-btn" onclick="editTrade(${t.id})">Edit</button>
+                    <button class="del-btn" onclick="deleteTrade(${t.id})">Del</button>
+                </td>
+            `;
+            list.appendChild(row);
+        });
 
-                const data = this.getFormData();
-                if (!this.validate(data)) return this.resetBtn(btnText, btnLoading);
+        document.getElementById('stat-total').innerText = trades.length;
+        document.getElementById('stat-win').innerText = win;
+        document.getElementById('stat-loss').innerText = loss;
+        document.getElementById('stat-rate').innerText = trades.length ? ((win/trades.length)*100).toFixed(1)+'%' : '0%';
+        document.getElementById('stat-pnl').innerText = `$${totalPnl.toFixed(2)}`;
+        document.getElementById('stat-pnl').className = totalPnl >= 0 ? 'profit' : 'loss';
+    }
 
-                const entry = {
-                    id: Date.now(),
-                    ...data,
-                    total: (parseFloat(data.quantity) * parseFloat(data.price)).toFixed(2),
-                    createdAt: new Date().toISOString()
-                };
+    function deleteTrade(id) { if(confirm('নিশ্চিত ডিলিট করবেন?')) { trades = trades.filter(t => t.id !== id); saveAndRender(); } }
 
-                this.entries.unshift(entry);
-                localStorage.setItem('salesEntries', JSON.stringify(this.entries));
-                
-                this.renderTable();
-                this.updateSummary();
-                this.clearForm();
-                this.showNotification('✅ এন্ট্রি সফলভাবে যোগ হয়েছে!', 'success');
-                
-                this.resetBtn(btnText, btnLoading);
-            }
+    function editTrade(id) {
+        const t = trades.find(t => t.id === id);
+        document.getElementById('edit-id').value = t.id;
+        document.getElementById('coin').value = t.coin;
+        document.getElementById('type').value = t.type;
+        document.getElementById('entry').value = t.entry;
+        document.getElementById('exit').value = t.exit;
+        document.getElementById('sl').value = t.sl;
+        document.getElementById('lev').value = t.lev;
+        document.getElementById('inv').value = t.inv;
+        document.getElementById('date').value = t.date;
+        document.getElementById('submit-btn').innerText = "Update Trade Data";
+        window.scrollTo(0,0);
+    }
 
-            getFormData() {
-                return {
-                    date: document.getElementById('date').value,
-                    item: document.getElementById('item').value.trim(),
-                    quantity: document.getElementById('quantity').value,
-                    unit: document.getElementById('unit').value,
-                    price: document.getElementById('price').value,
-                    location: document.getElementById('location').value.trim()
-                };
-            }
+    function exportCSV() {
+        let csv = "Date,Coin,Type,Entry,Exit,RR,PnL($),Pct(%)\n";
+        trades.forEach(t => { csv += `${t.date},${t.coin},${t.type},${t.entry},${t.exit},${t.rr},${t.pnl},${t.pct}\n`; });
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.setAttribute('href', url);
+        a.setAttribute('download', 'trading_journal.csv');
+        a.click();
+    }
 
-            validate(data) {
-                if (!data.date || !data.item || !data.quantity || !data.price) {
-                    this.showNotification('❌ সকল 필্ড পূরণ করুন!', 'error');
-                    return false;
-                }
-                if (parseFloat(data.quantity) <= 0 || parseFloat(data.price) <= 0) {
-                    this.showNotification('❌ পরিমাণ ও দাম ০ এর বেশি হতে হবে!', 'error');
-                    return false;
-                }
-                return true;
-            }
+    render();
+</script>
 
-            resetBtn(textEl, loadingEl) {
-                textEl.style.display = 'inline';
-                loadingEl
+</body>
+</html>

@@ -3,264 +3,261 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consistency = Success</title>
+    <title>Trading Data Entry</title>
+    <!-- SheetJS CDN (Excel Export এর জন্য) -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <style>
-        :root {
-            --bg-color: #0f0f0f;
-            --card-bg: #1a1a1a;
-            --text-color: #e0e0e0;
-            --primary: #f39c12;
-            --success: #2ecc71;
-            --danger: #e74c3c;
-            --border: #333;
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
         }
-
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            padding: 15px;
+            background-color: #f4f6f9;
             margin: 0;
-        }
-
-        .container { max-width: 1200px; margin: 0 auto; }
-        h1 { text-align: center; color: var(--primary); margin-bottom: 5px; text-transform: uppercase; }
-        .subtitle { text-align: center; color: #888; margin-bottom: 25px; font-size: 0.9em; }
-
-        /* Dashboard */
-        .dashboard {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid var(--border);
-            text-align: center;
-        }
-
-        .card h3 { margin: 0; font-size: 14px; color: #888; }
-        .card p { margin: 10px 0 0 0; font-size: 22px; font-weight: bold; }
-
-        /* Form */
-        .form-section {
-            background: var(--card-bg);
             padding: 20px;
-            border-radius: 10px;
-            border: 1px solid var(--border);
-            margin-bottom: 25px;
         }
-
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
         .form-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
         }
-
-        label { font-size: 12px; color: #aaa; display: block; margin-bottom: 5px; }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+        }
         input, select {
-            width: 100%; padding: 10px; background: #252525; border: 1px solid var(--border);
-            color: #fff; border-radius: 5px; box-sizing: border-box;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
         }
-
-        .btn-group { display: flex; gap: 10px; margin-top: 15px; }
-        button { flex: 1; padding: 12px; font-weight: bold; border: none; border-radius: 5px; cursor: pointer; }
-        .btn-add { background: var(--primary); color: #000; }
-        .btn-export { background: #444; color: #fff; }
-
-        /* Table */
-        .table-container { background: var(--card-bg); border-radius: 10px; overflow-x: auto; border: 1px solid var(--border); }
-        table { width: 100%; border-collapse: collapse; min-width: 900px; }
-        th, td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border); font-size: 14px; }
-        th { background: #222; color: #888; }
-
-        .profit { color: var(--success); }
-        .loss { color: var(--danger); }
-        .badge { padding: 3px 7px; border-radius: 4px; font-size: 11px; font-weight: bold; }
-        .badge-buy { background: rgba(46, 204, 113, 0.2); color: var(--success); }
-        .badge-sell { background: rgba(231, 76, 60, 0.2); color: var(--danger); }
-
-        .action-btns { display: flex; gap: 5px; }
-        .edit-btn { background: #3498db; color: white; padding: 5px 8px; border-radius: 3px; font-size: 12px; border:none; cursor:pointer;}
-        .del-btn { background: var(--danger); color: white; padding: 5px 8px; border-radius: 3px; font-size: 12px; border:none; cursor:pointer;}
+        .btn-container {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn-add {
+            background-color: #28a745;
+            color: white;
+            flex: 2;
+        }
+        .btn-add:hover {
+            background-color: #218838;
+        }
+        .btn-excel {
+            background-color: #007bff;
+            color: white;
+            flex: 1;
+        }
+        .btn-excel:hover {
+            background-color: #0069d9;
+        }
+        .btn-clear {
+            background-color: #dc3545;
+            color: white;
+            flex: 1;
+        }
+        .btn-clear:hover {
+            background-color: #c82333;
+        }
+        .table-container {
+            margin-top: 30px;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #343a40;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Consistency = Success</h1>
-    <div class="subtitle">Advanced Crypto Trading Journal</div>
-
-    <div class="dashboard">
-        <div class="card"><h3>মোট ট্রেড</h3><p id="stat-total">0</p></div>
-        <div class="card"><h3>উইন (Win)</h3><p id="stat-win" class="profit">0</p></div>
-        <div class="card"><h3>লস (Loss)</h3><p id="stat-loss" class="loss">0</p></div>
-        <div class="card"><h3>উইন রেট</h3><p id="stat-rate" style="color:var(--primary)">0%</p></div>
-        <div class="card"><h3>মোট প্রফিট</h3><p id="stat-pnl">$0.00</p></div>
-    </div>
-
-    <div class="form-section">
-        <form id="trade-form">
-            <input type="hidden" id="edit-id">
-            <div class="form-grid">
-                <div><label>কয়েন</label><input type="text" id="coin" placeholder="BTC" required></div>
-                <div><label>টাইপ</label><select id="type"><option value="BUY">BUY (Long)</option><option value="SELL">SELL (Short)</option></select></div>
-                <div><label>এন্ট্রি ($)</label><input type="number" id="entry" step="any" required></div>
-                <div><label>এক্সিট ($)</label><input type="number" id="exit" step="any" required></div>
-                <div><label>স্টপ লস ($)</label><input type="number" id="sl" step="any" placeholder="RR হিসাবের জন্য"></div>
-                <div><label>লিভারেজ</label><input type="number" id="lev" value="1" required></div>
-                <div><label>ইনভেস্ট ($)</label><input type="number" id="inv" required></div>
-                <div><label>তারিখ</label><input type="date" id="date" required></div>
+    <h2>Trading Data Entry Form</h2>
+    
+    <form id="entryForm">
+        <div class="form-grid">
+            <div class="form-group">
+                <label for="date">Date:</label>
+                <input type="date" id="date" required>
             </div>
-            <div class="btn-group">
-                <button type="submit" class="btn-add" id="submit-btn">জার্নালে যোগ করুন</button>
-                <button type="button" class="btn-export" onclick="exportCSV()">Backup (CSV)</button>
+            <div class="form-group">
+                <label for="pair">Pair Name:</label>
+                <input type="text" id="pair" placeholder="e.g. EUR/USD, BTC/USDT" required>
             </div>
-        </form>
-    </div>
+            <div class="form-group">
+                <label for="type">Long/Short:</label>
+                <select id="type" required>
+                    <option value="">Select Type</option>
+                    <option value="Long">Long</option>
+                    <option value="Short">Short</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="entry">Entry Price:</label>
+                <input type="number" step="any" id="entry" placeholder="0.00" required>
+            </div>
+            <div class="form-group">
+                <label for="tp01">TP01:</label>
+                <input type="number" step="any" id="tp01" placeholder="0.00" required>
+            </div>
+            <div class="form-group">
+                <label for="sl">Stop Loss:</label>
+                <input type="number" step="any" id="sl" placeholder="0.00" required>
+            </div>
+        </div>
+
+        <div class="btn-container">
+            <button type="submit" class="btn-add">Add Entry</button>
+            <button type="button" class="btn-excel" onclick="exportToExcel()">Export to Excel</button>
+            <button type="button" class="btn-clear" onclick="clearData()">Clear All Data</button>
+        </div>
+    </form>
 
     <div class="table-container">
-        <table>
+        <h3>Saved Entries</h3>
+        <table id="dataTable">
             <thead>
                 <tr>
-                    <th>তারিখ</th>
-                    <th>কয়েন</th>
-                    <th>টাইপ</th>
-                    <th>এন্ট্রি/এক্সিট</th>
-                    <th>RR</th>
-                    <th>লাভ/লস ($)</th>
-                    <th>শতকরা (%)</th>
-                    <th>অ্যাকশন</th>
+                    <th>Date</th>
+                    <th>Pair Name</th>
+                    <th>Long/Short</th>
+                    <th>Entry</th>
+                    <th>TP01</th>
+                    <th>Stop Loss</th>
                 </tr>
             </thead>
-            <tbody id="trade-list"></tbody>
+            <tbody id="tableBody">
+                <!-- Data will be loaded here -->
+            </tbody>
         </table>
     </div>
 </div>
 
 <script>
-    let trades = JSON.parse(localStorage.getItem('my_crypto_journal_v3')) || [];
+    let entries = JSON.parse(localStorage.getItem('tradeEntries')) || [];
 
-    const form = document.getElementById('trade-form');
+    // আজকের তারিখ ডিফল্ট হিসেবে সেট করার জন্য
     document.getElementById('date').valueAsDate = new Date();
 
-    form.addEventListener('submit', (e) => {
+    // টেবিল আপডেট করা
+    function renderTable() {
+        const tbody = document.getElementById('tableBody');
+        tbody.innerHTML = '';
+        entries.forEach((item) => {
+            const row = `<tr>
+                <td>${item.date}</td>
+                <td>${item.pair}</td>
+                <td>${item.type}</td>
+                <td>${item.entry}</td>
+                <td>${item.tp01}</td>
+                <td>${item.sl}</td>
+            </tr>`;
+            tbody.innerHTML += row;
+        });
+    }
+
+    // ফর্ম সাবমিট হ্যান্ডলার
+    document.getElementById('entryForm').addEventListener('submit', function(e) {
         e.preventDefault();
-        const id = document.getElementById('edit-id').value;
-        
-        const tradeData = {
-            id: id ? parseInt(id) : Date.now(),
+
+        const newEntry = {
             date: document.getElementById('date').value,
-            coin: document.getElementById('coin').value.toUpperCase(),
+            pair: document.getElementById('pair').value,
             type: document.getElementById('type').value,
-            entry: parseFloat(document.getElementById('entry').value),
-            exit: parseFloat(document.getElementById('exit').value),
-            sl: parseFloat(document.getElementById('sl').value) || 0,
-            lev: parseFloat(document.getElementById('lev').value),
-            inv: parseFloat(document.getElementById('inv').value)
+            entry: document.getElementById('entry').value,
+            tp01: document.getElementById('tp01').value,
+            sl: document.getElementById('sl').value
         };
 
-        // Calculation
-        let rawPct = (tradeData.type === 'BUY') 
-            ? ((tradeData.exit - tradeData.entry) / tradeData.entry) 
-            : ((tradeData.entry - tradeData.exit) / tradeData.entry);
-        
-        tradeData.pct = rawPct * 100 * tradeData.lev;
-        tradeData.pnl = (tradeData.inv * tradeData.pct) / 100;
+        entries.push(newEntry);
+        localStorage.setItem('tradeEntries', JSON.stringify(entries));
+        renderTable();
 
-        // RR Calculation: (Target - Entry) / (Entry - StopLoss)
-        if(tradeData.sl > 0 && tradeData.sl !== tradeData.entry) {
-            let risk = Math.abs(tradeData.entry - tradeData.sl);
-            let reward = Math.abs(tradeData.exit - tradeData.entry);
-            tradeData.rr = (reward / risk).toFixed(2);
-        } else { tradeData.rr = "N/A"; }
-
-        if(id) {
-            trades = trades.map(t => t.id === parseInt(id) ? tradeData : t);
-            document.getElementById('submit-btn').innerText = "জার্নালে যোগ করুন";
-            document.getElementById('edit-id').value = "";
-        } else {
-            trades.push(tradeData);
-        }
-
-        saveAndRender();
-        form.reset();
-        document.getElementById('date').valueAsDate = new Date();
+        // ফর্মের মানসমূহ রিসেট (তারিখ বাদ দিয়ে)
+        document.getElementById('pair').value = '';
+        document.getElementById('type').value = '';
+        document.getElementById('entry').value = '';
+        document.getElementById('tp01').value = '';
+        document.getElementById('sl').value = '';
     });
 
-    function saveAndRender() {
-        localStorage.setItem('my_crypto_journal_v3', JSON.stringify(trades));
-        render();
+    // Excel ফাইলে এক্সপোর্ট করার ফাংশন
+    function exportToExcel() {
+        if (entries.length === 0) {
+            alert('Export করার জন্য কোনো ডেটা নেই!');
+            return;
+        }
+
+        // কাস্টম হেডার দিয়ে এক্সেল ডেটা তৈরি
+        const formattedData = entries.map(item => ({
+            "Date": item.date,
+            "Pair Name": item.pair,
+            "Long/Short": item.type,
+            "Entry": item.entry,
+            "TP01": item.tp01,
+            "Stop Loss": item.sl
+        }));
+
+        const worksheet = XLSX.utils.json_to_sheet(formattedData);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Trade_Data");
+
+        // আজকের তারিখ অনুযায়ী ফাইল নেম তৈরি
+        const fileName = `Trading_Data_${new Date().toISOString().slice(0, 10)}.xlsx`;
+        XLSX.writeFile(workbook, fileName);
     }
 
-    function render() {
-        const list = document.getElementById('trade-list');
-        list.innerHTML = "";
-        let win = 0, loss = 0, totalPnl = 0;
-
-        trades.sort((a,b) => new Date(b.date) - new Date(a.date)).forEach(t => {
-            totalPnl += t.pnl;
-            if(t.pnl > 0) win++; else if(t.pnl < 0) loss++;
-
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${t.date}</td>
-                <td><b>${t.coin}</b> <small>${t.lev}x</small></td>
-                <td><span class="badge ${t.type==='BUY'?'badge-buy':'badge-sell'}">${t.type}</span></td>
-                <td>${t.entry} / ${t.exit}</td>
-                <td>1:${t.rr}</td>
-                <td class="${t.pnl>=0?'profit':'loss'}">${t.pnl>=0?'+':''}${t.pnl.toFixed(2)}</td>
-                <td class="${t.pnl>=0?'profit':'loss'}">${t.pct.toFixed(2)}%</td>
-                <td class="action-btns">
-                    <button class="edit-btn" onclick="editTrade(${t.id})">Edit</button>
-                    <button class="del-btn" onclick="deleteTrade(${t.id})">Del</button>
-                </td>
-            `;
-            list.appendChild(row);
-        });
-
-        document.getElementById('stat-total').innerText = trades.length;
-        document.getElementById('stat-win').innerText = win;
-        document.getElementById('stat-loss').innerText = loss;
-        document.getElementById('stat-rate').innerText = trades.length ? ((win/trades.length)*100).toFixed(1)+'%' : '0%';
-        document.getElementById('stat-pnl').innerText = `$${totalPnl.toFixed(2)}`;
-        document.getElementById('stat-pnl').className = totalPnl >= 0 ? 'profit' : 'loss';
+    // সকল ডেটা মোছার ফাংশন
+    function clearData() {
+        if (confirm('আপনি কি নিশ্চিত যে সকল ডেটা মুছে ফেলতে চান?')) {
+            entries = [];
+            localStorage.removeItem('tradeEntries');
+            renderTable();
+        }
     }
 
-    function deleteTrade(id) { if(confirm('নিশ্চিত ডিলিট করবেন?')) { trades = trades.filter(t => t.id !== id); saveAndRender(); } }
-
-    function editTrade(id) {
-        const t = trades.find(t => t.id === id);
-        document.getElementById('edit-id').value = t.id;
-        document.getElementById('coin').value = t.coin;
-        document.getElementById('type').value = t.type;
-        document.getElementById('entry').value = t.entry;
-        document.getElementById('exit').value = t.exit;
-        document.getElementById('sl').value = t.sl;
-        document.getElementById('lev').value = t.lev;
-        document.getElementById('inv').value = t.inv;
-        document.getElementById('date').value = t.date;
-        document.getElementById('submit-btn').innerText = "Update Trade Data";
-        window.scrollTo(0,0);
-    }
-
-    function exportCSV() {
-        let csv = "Date,Coin,Type,Entry,Exit,RR,PnL($),Pct(%)\n";
-        trades.forEach(t => { csv += `${t.date},${t.coin},${t.type},${t.entry},${t.exit},${t.rr},${t.pnl},${t.pct}\n`; });
-        const blob = new Blob([csv], { type: 'text/csv' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.setAttribute('href', url);
-        a.setAttribute('download', 'trading_journal.csv');
-        a.click();
-    }
-
-    render();
+    // পেজ লোড হওয়ার সময় আগের জমা থাকা ডেটা দেখাবে
+    renderTable();
 </script>
 
 </body>
-</html>
+    </html>
